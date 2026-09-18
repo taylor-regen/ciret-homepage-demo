@@ -15,7 +15,6 @@
       --ink-soft: #1c1c1c;
       --paper: #f3f1eb;
       --paper-2: #eae7e0;
-      --page-bg: #e4e1d9;
       --white: #ffffff;
       --muted: #6a6a66;
       --line: rgba(18,18,18,0.1);
@@ -33,7 +32,7 @@
       margin: 0;
       font-family: var(--font-sans);
       color: var(--ink);
-      background: #0d0d0d;
+      background: var(--paper);
       line-height: 1.55;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
@@ -44,9 +43,8 @@
     ul { margin: 0; padding: 0; list-style: none; }
 
     .page {
-      max-width: 1440px;
-      margin: 0 auto;
-      background: var(--page-bg);
+      width: 100%;
+      background: var(--paper);
       overflow: hidden;
     }
 
@@ -160,7 +158,7 @@
     }
     .hero-panel {
       position: relative;
-      min-height: min(68vh, 640px);
+      min-height: min(82vh, 770px);
       overflow: hidden;
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -310,6 +308,9 @@
     }
 
     /* —— About —— */
+    .about {
+      padding: 4rem 0 3rem;
+    }
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -329,116 +330,98 @@
       border-radius: var(--radius);
       overflow: hidden;
       aspect-ratio: 4/3;
+      box-shadow: 0 18px 40px rgba(18,18,18,0.08);
     }
     .about-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
     }
     @media (max-width: 800px) {
       .about-grid { grid-template-columns: 1fr; }
       .about-media { order: -1; max-height: 280px; }
     }
 
-    /* —— Brands (selectable cards like process) —— */
+    /* —— Brands: darkened image cards —— */
     .brands-head {
       max-width: 36rem;
+      margin-bottom: 1.75rem;
     }
     .brands-track {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 0.65rem;
-      position: relative;
-    }
-    .brands-track::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: -1.5rem;
-      height: 1px;
-      background: var(--line);
+      gap: 0.75rem;
     }
     .brand-card {
       position: relative;
       border-radius: var(--radius);
-      padding: 1.35rem 1.15rem 1.45rem;
-      min-height: 280px;
-      border: 1px solid transparent;
-      transition: background 0.35s var(--ease), color 0.35s var(--ease), transform 0.35s var(--ease);
+      overflow: hidden;
+      min-height: 320px;
+      color: #fff;
       display: flex;
       flex-direction: column;
-      gap: 0.85rem;
+      justify-content: flex-end;
+      padding: 1.35rem 1.2rem 1.4rem;
+      isolation: isolate;
+      transition: transform 0.4s var(--ease);
     }
-    .brand-card::before {
+    .brand-card:hover { transform: translateY(-4px); }
+    .brand-card-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+    }
+    .brand-card-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s var(--ease);
+    }
+    .brand-card:hover .brand-card-bg img { transform: scale(1.06); }
+    .brand-card::after {
       content: "";
       position: absolute;
-      left: 12%;
-      right: 12%;
-      top: calc(-1.5rem - 1px);
-      height: 3px;
-      background: transparent;
-      border-radius: 2px;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.82) 100%);
       transition: background 0.35s var(--ease);
     }
-    .brand-card:hover { transform: translateY(-2px); }
-    .brand-card.is-active {
-      background: var(--ink);
-      color: #fff;
+    .brand-card:hover::after {
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.62) 45%, rgba(0,0,0,0.88) 100%);
     }
-    .brand-card.is-active::before { background: var(--ink); }
-    .brand-card-label {
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .brand-card.is-active .brand-card-label { color: rgba(255,255,255,0.5); }
     .brand-card-logo {
-      height: 28px;
+      height: 26px;
       width: auto;
-      max-width: 120px;
+      max-width: 110px;
       object-fit: contain;
       object-position: left center;
+      margin-bottom: 0.75rem;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.35));
     }
-    .brand-card-logo.is-white { display: none; }
-    .brand-card.is-active .brand-card-logo.is-black { display: none; }
-    .brand-card.is-active .brand-card-logo.is-white { display: block; }
     .brand-card h3 {
-      margin: 0;
+      margin: 0 0 0.35rem;
       font-family: var(--font-display);
       font-size: 1.05rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.2;
     }
-    .brand-card ul {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      margin-top: auto;
-    }
-    .brand-card li {
-      font-size: 0.84rem;
-      color: var(--muted);
+    .brand-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.72);
       line-height: 1.4;
-      padding-left: 0;
     }
-    .brand-card li::before {
-      content: "- ";
-      opacity: 0.55;
-    }
-    .brand-card.is-active li { color: rgba(255,255,255,0.68); }
 
     @media (max-width: 1000px) {
       .brands-track { grid-template-columns: repeat(3, 1fr); }
-      .brand-card::before { display: none; }
-      .brands-track::before { display: none; }
     }
     @media (max-width: 640px) {
       .brands-track { grid-template-columns: 1fr; }
-      .brand-card { min-height: 0; }
+      .brand-card { min-height: 240px; }
     }
 
     /* —— Process —— */
@@ -852,7 +835,7 @@
           <div class="hero-copy">
             <div class="hero-copy-inner">
               <p class="hero-kicker">Painting &amp; decorating tools · Est. UK</p>
-              <h1 class="hero-title">Precision decorating without the guesswork.</h1>
+              <h1 class="hero-title">Success with painting tools</h1>
               <p class="hero-lede">
                 Manufacturers and suppliers of quality painting and decorating products.
                 Rollers, brushes, masking, prep and adhesives for trade and retail.
@@ -875,7 +858,7 @@
       </section>
 
       <!-- ABOUT -->
-      <section class="block" id="about">
+      <section class="about" id="about">
         <div class="wrap about-grid">
           <div class="about-copy">
             <span class="pill-tag">About Ciret</span>
@@ -890,83 +873,67 @@
             </p>
           </div>
           <div class="about-media">
-            <img src="assets/img-rota.jpg" alt="Professional roller application on site" />
+            <img src="assets/img-application.jpg" alt="Clean red paint edge with roller on site" />
           </div>
         </div>
       </section>
 
-      <!-- BRANDS: selectable black cards -->
+      <!-- BRANDS: darkened image cards -->
       <section class="block block-tight" id="brands">
         <div class="wrap">
           <div class="brands-head">
             <span class="pill-tag">Our brands</span>
             <h2 class="section-title">Five brands. Full decorating lifecycle.</h2>
             <p class="section-lede">
-              From preparation through to the finishing touches. Select a brand to see what it covers.
+              From preparation through to the finishing touches. Explore the range behind every stage of the job.
             </p>
           </div>
-          <hr class="section-rule" />
 
-          <div class="brands-track" role="list">
-            <button class="brand-card is-active" id="rota" type="button" role="listitem" aria-pressed="true" data-brand="rota">
-              <span class="brand-card-label">Rollers</span>
-              <img class="brand-card-logo is-black" src="assets/logo-rota-black.png" alt="Rota" />
-              <img class="brand-card-logo is-white" src="assets/logo-rota-white.png" alt="" />
+          <div class="brands-track">
+            <a class="brand-card" id="rota" href="#rota">
+              <span class="brand-card-bg" aria-hidden="true">
+                <img src="assets/unsplash-roller.jpg" alt="" />
+              </span>
+              <img class="brand-card-logo" src="assets/logo-rota-white.png" alt="Rota" />
               <h3>Rollers &amp; accessories</h3>
-              <ul>
-                <li>Frames, sleeves &amp; kits</li>
-                <li>Trays, scuttles &amp; poles</li>
-                <li>Coverage for every surface</li>
-              </ul>
-            </button>
+              <p>Frames, sleeves, trays and poles for every surface.</p>
+            </a>
 
-            <button class="brand-card" id="kana" type="button" role="listitem" aria-pressed="false" data-brand="kana">
-              <span class="brand-card-label">Brushes</span>
-              <img class="brand-card-logo is-black" src="assets/logo-kana-black.png" alt="Kana" />
-              <img class="brand-card-logo is-white" src="assets/logo-kana-white.png" alt="" />
+            <a class="brand-card" id="kana" href="#kana">
+              <span class="brand-card-bg" aria-hidden="true">
+                <img src="assets/brand-kana.png" alt="" />
+              </span>
+              <img class="brand-card-logo" src="assets/logo-kana-white.png" alt="Kana" />
               <h3>Paint brushes &amp; accessories</h3>
-              <ul>
-                <li>Cutting in &amp; sash work</li>
-                <li>Wall, block &amp; specialist</li>
-                <li>Brushes that hold a line</li>
-              </ul>
-            </button>
+              <p>Cutting in, sash work and specialist brushes.</p>
+            </a>
 
-            <button class="brand-card" id="masq" type="button" role="listitem" aria-pressed="false" data-brand="masq">
-              <span class="brand-card-label">Masking</span>
-              <img class="brand-card-logo is-black" src="assets/logo-masq-black.png" alt="Masq" />
-              <img class="brand-card-logo is-white" src="assets/logo-masq-white.png" alt="" />
+            <a class="brand-card" id="masq" href="#masq">
+              <span class="brand-card-bg" aria-hidden="true">
+                <img src="assets/img-masq.jpg" alt="" />
+              </span>
+              <img class="brand-card-logo" src="assets/logo-masq-white.png" alt="Masq" />
               <h3>Masking tapes &amp; film</h3>
-              <ul>
-                <li>Delicate to high-tack tapes</li>
-                <li>Covermasq film for speed</li>
-                <li>Sharp lines without peel drama</li>
-              </ul>
-            </button>
+              <p>Sharp lines from delicate surfaces to façades.</p>
+            </a>
 
-            <button class="brand-card" id="prep" type="button" role="listitem" aria-pressed="false" data-brand="prep">
-              <span class="brand-card-label">Preparation</span>
-              <img class="brand-card-logo is-black" src="assets/logo-prep-black.png" alt="Prep" />
-              <img class="brand-card-logo is-white" src="assets/logo-prep-white.png" alt="" />
+            <a class="brand-card" id="prep" href="#prep">
+              <span class="brand-card-bg" aria-hidden="true">
+                <img src="assets/img-prep.jpg" alt="" />
+              </span>
+              <img class="brand-card-logo" src="assets/logo-prep-white.png" alt="Prep" />
               <h3>Preparation products</h3>
-              <ul>
-                <li>Knives, scrapers &amp; abrasives</li>
-                <li>Dustsheets &amp; floor protection</li>
-                <li>Site ready before first coat</li>
-              </ul>
-            </button>
+              <p>Knives, abrasives and site protection.</p>
+            </a>
 
-            <button class="brand-card" id="beeline" type="button" role="listitem" aria-pressed="false" data-brand="beeline">
-              <span class="brand-card-label">Adhesives</span>
-              <img class="brand-card-logo is-black" src="assets/logo-beeline-black.png" alt="Beeline" />
-              <img class="brand-card-logo is-white" src="assets/logo-beeline-white.png" alt="" />
+            <a class="brand-card" id="beeline" href="#beeline">
+              <span class="brand-card-bg" aria-hidden="true">
+                <img src="assets/brand-beeline.jpg" alt="" />
+              </span>
+              <img class="brand-card-logo" src="assets/logo-beeline-white.png" alt="Beeline" />
               <h3>Fillers, adhesives &amp; cleaners</h3>
-              <ul>
-                <li>Wallpaper adhesives &amp; fillers</li>
-                <li>Pasting &amp; jointing</li>
-                <li>Finish that stays put</li>
-              </ul>
-            </button>
+              <p>Wallpapering and jointing that stays put.</p>
+            </a>
           </div>
         </div>
       </section>
@@ -1057,7 +1024,7 @@
             </article>
           </div>
           <aside class="cta-card" id="contact">
-            <img src="assets/img-application.jpg" alt="Decorator at work" />
+            <img src="assets/case-rough.jpg" alt="Decorator painting a wall" />
             <h3>Ready for your next project?</h3>
             <a class="btn btn-solid btn-sm" href="#">Get in touch</a>
           </aside>
@@ -1201,31 +1168,7 @@
   </div>
 
   <script>
-    (function () {
-      var cards = Array.prototype.slice.call(document.querySelectorAll('.brand-card'));
-
-      function activate(card) {
-        cards.forEach(function (c) {
-          var on = c === card;
-          c.classList.toggle('is-active', on);
-          c.setAttribute('aria-pressed', on ? 'true' : 'false');
-        });
-      }
-
-      cards.forEach(function (card) {
-        card.addEventListener('click', function () {
-          activate(card);
-          history.replaceState(null, '', '#' + card.id);
-        });
-      });
-
-      if (location.hash) {
-        var target = document.querySelector(location.hash);
-        if (target && target.classList.contains('brand-card')) {
-          activate(target);
-        }
-      }
-    })();
+    /* Homepage is static — brand cards are visual links only. */
   </script>
 </body>
 </html>
