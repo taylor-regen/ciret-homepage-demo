@@ -357,7 +357,7 @@
       position: relative;
       border-radius: var(--radius);
       overflow: hidden;
-      min-height: 320px;
+      min-height: 340px;
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -395,7 +395,7 @@
     .brand-card-logo {
       height: 26px;
       width: auto;
-      max-width: 110px;
+      max-width: 120px;
       object-fit: contain;
       object-position: left center;
       margin-bottom: 0.75rem;
@@ -415,13 +415,39 @@
       color: rgba(255,255,255,0.72);
       line-height: 1.4;
     }
+    .brand-card-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.85rem;
+      padding: 0.5rem 0.95rem;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 0.78rem;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+      width: fit-content;
+    }
+    .brand-card:hover .brand-card-cta,
+    .brand-card:focus-visible .brand-card-cta {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     @media (max-width: 1000px) {
       .brands-track { grid-template-columns: repeat(3, 1fr); }
     }
     @media (max-width: 640px) {
       .brands-track { grid-template-columns: 1fr; }
-      .brand-card { min-height: 240px; }
+      .brand-card { min-height: 260px; }
+      .brand-card-cta {
+        opacity: 1;
+        transform: none;
+      }
     }
 
     /* —— Process —— */
@@ -808,7 +834,6 @@
             <li><a href="#top">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#brands">Brands</a></li>
-            <li><a href="#process">How it works</a></li>
             <li><a href="#cases">Case studies</a></li>
             <li><a href="#news">News</a></li>
           </ul>
@@ -892,11 +917,12 @@
           <div class="brands-track">
             <a class="brand-card" id="rota" href="#rota">
               <span class="brand-card-bg" aria-hidden="true">
-                <img src="assets/unsplash-roller.jpg" alt="" />
+                <img src="assets/img-rota.jpg" alt="" />
               </span>
               <img class="brand-card-logo" src="assets/logo-rota-white.png" alt="Rota" />
               <h3>Rollers &amp; accessories</h3>
               <p>Frames, sleeves, trays and poles for every surface.</p>
+              <span class="brand-card-cta">View products</span>
             </a>
 
             <a class="brand-card" id="kana" href="#kana">
@@ -906,6 +932,7 @@
               <img class="brand-card-logo" src="assets/logo-kana-white.png" alt="Kana" />
               <h3>Paint brushes &amp; accessories</h3>
               <p>Cutting in, sash work and specialist brushes.</p>
+              <span class="brand-card-cta">View products</span>
             </a>
 
             <a class="brand-card" id="masq" href="#masq">
@@ -915,6 +942,7 @@
               <img class="brand-card-logo" src="assets/logo-masq-white.png" alt="Masq" />
               <h3>Masking tapes &amp; film</h3>
               <p>Sharp lines from delicate surfaces to façades.</p>
+              <span class="brand-card-cta">View products</span>
             </a>
 
             <a class="brand-card" id="prep" href="#prep">
@@ -924,67 +952,18 @@
               <img class="brand-card-logo" src="assets/logo-prep-white.png" alt="Prep" />
               <h3>Preparation products</h3>
               <p>Knives, abrasives and site protection.</p>
+              <span class="brand-card-cta">View products</span>
             </a>
 
             <a class="brand-card" id="beeline" href="#beeline">
               <span class="brand-card-bg" aria-hidden="true">
-                <img src="assets/brand-beeline.jpg" alt="" />
+                <img src="assets/img-beeline.jpg" alt="" />
               </span>
               <img class="brand-card-logo" src="assets/logo-beeline-white.png" alt="Beeline" />
               <h3>Fillers, adhesives &amp; cleaners</h3>
               <p>Wallpapering and jointing that stays put.</p>
+              <span class="brand-card-cta">View products</span>
             </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- PROCESS -->
-      <section class="block block-tight" id="process">
-        <div class="wrap">
-          <span class="pill-tag">Process</span>
-          <h2 class="section-title">How a job gets done right</h2>
-          <p class="section-lede">
-            Four clear stages, from bare wall to finished room. Nothing skipped, nothing left to chance.
-          </p>
-          <hr class="section-rule" />
-
-          <div class="process-grid">
-            <article class="step step-active">
-              <p class="step-label">Stage 01</p>
-              <h3>01 Prep</h3>
-              <ul>
-                <li>Knives, scrapers &amp; abrasives</li>
-                <li>Dustsheets &amp; floor protection</li>
-                <li>Surface ready before paint</li>
-              </ul>
-            </article>
-            <article class="step">
-              <p class="step-label">Stage 02</p>
-              <h3>02 Mask</h3>
-              <ul>
-                <li>Painters tapes for every surface</li>
-                <li>Masking film for fast cover</li>
-                <li>Clean edges that hold</li>
-              </ul>
-            </article>
-            <article class="step">
-              <p class="step-label">Stage 03</p>
-              <h3>03 Apply</h3>
-              <ul>
-                <li>Rota rollers &amp; frames</li>
-                <li>Kana brushes for cutting in</li>
-                <li>Coverage that earns its keep</li>
-              </ul>
-            </article>
-            <article class="step">
-              <p class="step-label">Stage 04</p>
-              <h3>04 Finish</h3>
-              <ul>
-                <li>Beeline fillers &amp; adhesives</li>
-                <li>Wallpapering without the mess</li>
-                <li>Handover-ready results</li>
-              </ul>
-            </article>
           </div>
         </div>
       </section>
@@ -999,37 +978,6 @@
           </div>
         </section>
       </div>
-
-      <!-- Proof -->
-      <section class="block block-tight">
-        <div class="wrap proof-grid">
-          <div class="stats">
-            <article class="stat">
-              <div>
-                <strong>5</strong>
-                <span>Own brands covering prep through finish</span>
-              </div>
-            </article>
-            <article class="stat">
-              <div>
-                <strong>Trade+</strong>
-                <span>Built for contractors, clear enough for retail</span>
-              </div>
-            </article>
-            <article class="stat">
-              <div>
-                <strong>UK</strong>
-                <span>Based in Havant, Hampshire. Stockists nationwide</span>
-              </div>
-            </article>
-          </div>
-          <aside class="cta-card" id="contact">
-            <img src="assets/case-rough.jpg" alt="Decorator painting a wall" />
-            <h3>Ready for your next project?</h3>
-            <a class="btn btn-solid btn-sm" href="#">Get in touch</a>
-          </aside>
-        </div>
-      </section>
 
       <!-- Cases -->
       <section class="block block-tight" id="cases">
@@ -1139,7 +1087,7 @@
       </section>
     </main>
 
-    <footer class="site-footer">
+    <footer class="site-footer" id="contact">
       <div class="wrap">
         <div class="footer-top">
           <div>
